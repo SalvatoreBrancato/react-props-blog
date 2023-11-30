@@ -1,42 +1,4 @@
-const posts = [
-    {
-        id: 1,
-        title: "Titolo del Post",
-        image: 'https://picsum.photos/600/400',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["html", "css"],
-        published: true,
-    },
-    {
-        id: 2,
-        title: "Titolo del Post",
-        image: 'https://picsum.photos/600/400',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["js", "css"],
-        published: true,
-    },
-    {
-        id: 3,
-        title: "Titolo del Post",
-        image: 'https://picsum.photos/600/400',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["js", "php"],
-        published: true,
-    },
-    {
-        id: 4,
-        title: "Titolo del Post",
-        image: 'https://picsum.photos/600/400',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["html"],
-        published: false,
-    },
-];
-
+import {posts} from '../../postDb'
 
 function InfoCard(props) {
     return (
@@ -46,16 +8,33 @@ function InfoCard(props) {
                 <h1 className="m-1">{props.title}</h1>
                 <p className="m-1">{props.content}</p>
                 <ul>
-                {props.tags.map((tag)=>{
-                    return(
-                        <li>{tag}</li>
-                    )
-                })}
+                    <ColorTag
+                    tags = {props.tags}
+                />
                 </ul>
                 <button className="btn-primary m-1">Leggi di più</button>
             </div>
         </div>
     ) 
+}
+
+
+function ColorTag(props){
+    return(
+        props.tags.map((tag)=>{
+            return(
+                <li className=
+                    {`
+                    ${tag == "html" ? "text-red-500" : 
+                        tag =="css" ? "text-yellow-600":
+                        tag =="js" ? "text-green-600":
+                        tag == "php" ? "text-blue-800": "" }
+                    `}>
+                    {tag}
+                </li>
+            )
+        })
+    )
 }
 
 export default function TheCard() {
